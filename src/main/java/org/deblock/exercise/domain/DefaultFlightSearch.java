@@ -1,7 +1,5 @@
 package org.deblock.exercise.domain;
 
-import org.deblock.exercise.delivery.SearchFlightRequest;
-
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 

@@ -1,11 +1,12 @@
 package org.deblock.exercise.domain;
 
-import org.deblock.exercise.delivery.SearchFlightRequest;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Set;
 
@@ -34,7 +35,7 @@ class DefaultFlightSearchTest {
     @Test
     void testWhenThereIsAtLeastOneFlightThenItMustBeRetrieved() {
         // GIVEN
-        SearchFlightRequest request = new SearchFlightRequest();
+        SearchFlightRequest request = givenARequest();
         when(flightSupplier.findBy(any())).thenReturn(Optional.of(FlightFactory.fromEzeToIst()));
 
         // WHEN
@@ -47,7 +48,7 @@ class DefaultFlightSearchTest {
     @Test
     void testWhenThereAreMoreThanOneResultForTheSameRequestThenItMustBeRetrieved() {
         // GIVEN
-        SearchFlightRequest request = new SearchFlightRequest();
+        SearchFlightRequest request = givenARequest();
         when(flightSupplier.findBy(any())).thenReturn(Optional.of(FlightFactory.fromEzeToIst()));
         when(anotherFlightSupplier.findBy(any())).thenReturn(Optional.of(FlightFactory.cheapestFromEzeToIst()));
 
@@ -62,7 +63,7 @@ class DefaultFlightSearchTest {
     @Test
     void testWhenTwoDifferentSuppliersRetrievedTheSameFlightThenOnlyOneResultMustBeRetrieved() {
         // GIVEN
-        SearchFlightRequest request = new SearchFlightRequest();
+        SearchFlightRequest request = givenARequest();
         Flight flight = FlightFactory.fromEzeToIst();
         when(flightSupplier.findBy(any())).thenReturn(Optional.of(flight));
         when(anotherFlightSupplier.findBy(any())).thenReturn(Optional.of(flight));
@@ -77,13 +78,24 @@ class DefaultFlightSearchTest {
     @Test
     void testWhenThereIsNotAtLeastOneResultThenAnEmptyListMustBeRetrieved() {
         // GIVEN
-        SearchFlightRequest request = new SearchFlightRequest();
+        SearchFlightRequest request = givenARequest();
 
         // WHEN
         Set<Flight> results = flightSearch.findAllBy(request);
 
         // THEN
         assertTrue(results.isEmpty());
+    }
+
+    @NotNull
+    private static SearchFlightRequest givenARequest() {
+        return new SearchFlightRequest.Builder()
+                .withOrigin("eze")
+                .withDestination("ist")
+                .withDepartureDate(LocalDateTime.now())
+                .withReturnDate(LocalDateTime.now().plusDays(30))
+                .withNumberOfPassengers(Short.valueOf("2"))
+                .build();
     }
 
     private void thenBothResultWereRetrieved(Set<Flight> results) {
