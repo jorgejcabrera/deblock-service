@@ -1,8 +1,8 @@
 package org.deblock.exercise.infrastructure.crazyair;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.deblock.exercise.domain.Flight;
-import org.deblock.exercise.domain.SearchFlightRequest;
+import org.deblock.exercise.domain.flight.Flight;
+import org.deblock.exercise.domain.flight.search.request.SearchFlightRequest;
 import org.deblock.exercise.infrastructure.MockServer;
 import org.deblock.exercise.infrastructure.NetworkConnectionConfig;
 import org.jetbrains.annotations.NotNull;
@@ -81,8 +81,8 @@ class CrazyAirTest {
         return new SearchFlightRequest.Builder()
                 .withOrigin("eze")
                 .withDestination("ist")
-                .withDepartureDate(LocalDateTime.now())
-                .withReturnDate(LocalDateTime.now().plusDays(30))
+                .withDepartureDate(LocalDateTime.now().toString())
+                .withReturnDate(LocalDateTime.now().plusDays(30).toString())
                 .withNumberOfPassengers(Short.valueOf("1"))
                 .build();
     }

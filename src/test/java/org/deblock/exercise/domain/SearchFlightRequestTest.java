@@ -1,5 +1,6 @@
 package org.deblock.exercise.domain;
 
+import org.deblock.exercise.domain.flight.search.request.SearchFlightRequest;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -13,7 +14,7 @@ class SearchFlightRequestTest {
     void testWhenAtLeastOneFieldIsEmptyThenAnExceptionMustBeThrown() {
         // WHEN
         Exception ex = assertThrows(RuntimeException.class, () -> new SearchFlightRequest.Builder()
-                .withReturnDate(LocalDateTime.now().plusDays(10))
+                .withReturnDate(LocalDateTime.now().plusDays(10).toString())
                 .withDestination("ist")
                 .withOrigin("eze")
                 .withNumberOfPassengers(Short.valueOf("2"))
@@ -28,8 +29,8 @@ class SearchFlightRequestTest {
     void testWhenTheAmountOfPassengersIsInvalidThenAnExceptionMustBeThrown() {
         // WHEN
         Exception ex = assertThrows(RuntimeException.class, () -> new SearchFlightRequest.Builder()
-                .withDepartureDate(LocalDateTime.now())
-                .withReturnDate(LocalDateTime.now().plusDays(10))
+                .withDepartureDate(LocalDateTime.now().toString())
+                .withReturnDate(LocalDateTime.now().plusDays(10).toString())
                 .withDestination("ist")
                 .withOrigin("eze")
                 .withNumberOfPassengers(Short.valueOf("6"))
@@ -44,8 +45,8 @@ class SearchFlightRequestTest {
     void testWhenTheOriginCodeIsWrongThenAnExceptionMustBeThrown() {
         // WHEN
         Exception ex = assertThrows(RuntimeException.class, () -> new SearchFlightRequest.Builder()
-                .withDepartureDate(LocalDateTime.now())
-                .withReturnDate(LocalDateTime.now().plusDays(10))
+                .withDepartureDate(LocalDateTime.now().toString())
+                .withReturnDate(LocalDateTime.now().plusDays(10).toString())
                 .withDestination("ist")
                 .withOrigin("ezasde")
                 .withNumberOfPassengers(Short.valueOf("2"))
@@ -60,8 +61,8 @@ class SearchFlightRequestTest {
     void testWhenTheDestinationCodeIsWrongThenAnExceptionMustBeThrown() {
         // WHEN
         Exception ex = assertThrows(RuntimeException.class, () -> new SearchFlightRequest.Builder()
-                .withDepartureDate(LocalDateTime.now())
-                .withReturnDate(LocalDateTime.now().plusDays(10))
+                .withDepartureDate(LocalDateTime.now().toString())
+                .withReturnDate(LocalDateTime.now().plusDays(10).toString())
                 .withDestination("asdist")
                 .withOrigin("eze")
                 .withNumberOfPassengers(Short.valueOf("2"))
@@ -76,8 +77,8 @@ class SearchFlightRequestTest {
     void testWhenTheDatesAreInvalidThenAnExceptionMustBeThrown() {
         // WHEN
         Exception ex = assertThrows(RuntimeException.class, () -> new SearchFlightRequest.Builder()
-                .withReturnDate(LocalDateTime.now())
-                .withDepartureDate(LocalDateTime.now().plusDays(10))
+                .withReturnDate(LocalDateTime.now().toString())
+                .withDepartureDate(LocalDateTime.now().plusDays(10).toString())
                 .withDestination("ist")
                 .withOrigin("eze")
                 .withNumberOfPassengers(Short.valueOf("2"))
@@ -85,7 +86,7 @@ class SearchFlightRequestTest {
         );
 
         // THEN
-        assertEquals("The returned must be greater than the departure date", ex.getMessage());
+        assertEquals("The returned date must be greater than the departure date", ex.getMessage());
     }
 
 }

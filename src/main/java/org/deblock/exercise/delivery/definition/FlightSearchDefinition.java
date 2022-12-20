@@ -1,9 +1,9 @@
 package org.deblock.exercise.delivery.definition;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.deblock.exercise.domain.DefaultFlightSearch;
-import org.deblock.exercise.domain.FlightSearch;
-import org.deblock.exercise.domain.FlightSupplier;
+import org.deblock.exercise.domain.flight.search.DefaultFlightSearch;
+import org.deblock.exercise.domain.flight.search.FlightSearch;
+import org.deblock.exercise.domain.flight.FlightSupplier;
 import org.deblock.exercise.infrastructure.NetworkConnectionConfig;
 import org.deblock.exercise.infrastructure.crazyair.CrazyAir;
 import org.springframework.context.annotation.Bean;

@@ -1,6 +1,12 @@
-package org.deblock.exercise.domain;
+package org.deblock.exercise.domain.flight.search.request;
+
+import org.deblock.exercise.domain.flight.search.request.exception.InvalidAirportCodeException;
+import org.deblock.exercise.domain.flight.search.request.exception.InvalidAmountOfPassengersException;
+import org.deblock.exercise.domain.flight.search.request.exception.InvalidDateException;
+import org.deblock.exercise.domain.flight.search.request.exception.InvalidFieldsException;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class SearchFlightRequest {
     private String origin;
@@ -48,6 +54,8 @@ public class SearchFlightRequest {
         private LocalDateTime returnDate;
         private Short numberOfPassengers;
 
+        private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS");
+
         public Builder() {
         }
 
@@ -61,13 +69,13 @@ public class SearchFlightRequest {
             return this;
         }
 
-        public Builder withDepartureDate(LocalDateTime departureDate) {
-            this.departureDate = departureDate;
+        public Builder withDepartureDate(String departureDate) {
+            this.departureDate = LocalDateTime.parse(departureDate, formatter);
             return this;
         }
 
-        public Builder withReturnDate(LocalDateTime returnDate) {
-            this.returnDate = returnDate;
+        public Builder withReturnDate(String returnDate) {
+            this.returnDate = LocalDateTime.parse(returnDate, formatter);
             return this;
         }
 
@@ -78,19 +86,19 @@ public class SearchFlightRequest {
 
         private void validate() {
             if (!allFieldsWereInitialized()) {
-                throw new RuntimeException("Origin, destination, departureDate, returnDate and numberOfPassengers are mandatory");
+                throw new InvalidFieldsException("Origin, destination, departureDate, returnDate and numberOfPassengers are mandatory");
             }
             if (datesAreInvalid(this.departureDate, this.returnDate)) {
-                throw new RuntimeException("The returned must be greater than the departure date");
+                throw new InvalidDateException("The returned date must be greater than the departure date");
             }
             if (!isAValidAirportIATACode(origin)) {
-                throw new RuntimeException("Invalid origin airport code");
+                throw new InvalidAirportCodeException("Invalid origin airport code");
             }
             if (!isAValidAirportIATACode(destination)) {
-                throw new RuntimeException("Invalid destination airport code");
+                throw new InvalidAirportCodeException("Invalid destination airport code");
             }
             if (maximumNumberOfPassengerHasBeenReached()) {
-                throw new RuntimeException("Maximum number of passenger are 4");
+                throw new InvalidAmountOfPassengersException("Maximum number of passenger are 4");
             }
         }
 

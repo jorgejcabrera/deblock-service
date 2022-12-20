@@ -1,5 +1,10 @@
 package org.deblock.exercise.domain;
 
+import org.deblock.exercise.domain.flight.Flight;
+import org.deblock.exercise.domain.flight.FlightSupplier;
+import org.deblock.exercise.domain.flight.search.DefaultFlightSearch;
+import org.deblock.exercise.domain.flight.search.FlightSearch;
+import org.deblock.exercise.domain.flight.search.request.SearchFlightRequest;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -92,8 +97,8 @@ class DefaultFlightSearchTest {
         return new SearchFlightRequest.Builder()
                 .withOrigin("eze")
                 .withDestination("ist")
-                .withDepartureDate(LocalDateTime.now())
-                .withReturnDate(LocalDateTime.now().plusDays(30))
+                .withDepartureDate(LocalDateTime.now().toString())
+                .withReturnDate(LocalDateTime.now().plusDays(30).toString())
                 .withNumberOfPassengers(Short.valueOf("2"))
                 .build();
     }

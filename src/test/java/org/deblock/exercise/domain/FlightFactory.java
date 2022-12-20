@@ -1,5 +1,7 @@
 package org.deblock.exercise.domain;
 
+import org.deblock.exercise.domain.flight.Flight;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 

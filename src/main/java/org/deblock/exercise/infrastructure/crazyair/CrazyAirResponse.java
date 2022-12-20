@@ -1,7 +1,7 @@
 package org.deblock.exercise.infrastructure.crazyair;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.deblock.exercise.domain.Flight;
+import org.deblock.exercise.domain.flight.Flight;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

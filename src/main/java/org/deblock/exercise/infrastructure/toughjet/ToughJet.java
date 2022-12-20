@@ -1,9 +1,9 @@
 package org.deblock.exercise.infrastructure.toughjet;
 
 
-import org.deblock.exercise.domain.SearchFlightRequest;
-import org.deblock.exercise.domain.Flight;
-import org.deblock.exercise.domain.FlightSupplier;
+import org.deblock.exercise.domain.flight.search.request.SearchFlightRequest;
+import org.deblock.exercise.domain.flight.Flight;
+import org.deblock.exercise.domain.flight.FlightSupplier;
 
 import java.util.Optional;
 

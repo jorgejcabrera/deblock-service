@@ -5,9 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import okhttp3.Response;
-import org.deblock.exercise.domain.SearchFlightRequest;
-import org.deblock.exercise.domain.Flight;
-import org.deblock.exercise.domain.FlightSupplier;
+import org.deblock.exercise.domain.flight.search.request.SearchFlightRequest;
+import org.deblock.exercise.domain.flight.Flight;
+import org.deblock.exercise.domain.flight.FlightSupplier;
 import org.deblock.exercise.infrastructure.NetworkConnectionConfig;
 import org.jetbrains.annotations.NotNull;
 
